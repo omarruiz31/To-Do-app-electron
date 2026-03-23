@@ -13,8 +13,8 @@ const createWindow = () => {
   Menu.setApplicationMenu(null);
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 400,
-    height: 300,
+    width: 600,
+    height: 400,
     alwaysOnTop: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
