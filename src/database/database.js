@@ -46,6 +46,11 @@ class AppDatabase{
         const stmt = this.db.prepare('SELECT * FROM tasks ORDER BY id DESC')
         return stmt.all();
     }
+    close(){
+        this.db.close();
+        console.log('Database closed!');
+        
+    }
 }
 
 export default AppDatabase;

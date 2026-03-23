@@ -1,15 +1,22 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>To-do</title>
-    <link rel="stylesheet" href="src/index.css">
-  </head>
-  <body>
-    <h1>To-do app !🧑🏻‍💻</h1>
-    <div class="container">
-      <input type="text" placeholder="Add task...">
-      <button class="add-tsk">+</button> 
+
+<head>
+  <meta charset="UTF-8" />
+  <title>To-do</title>
+  <link rel="stylesheet" href="src/index.css">
+</head>
+
+<body>
+  <h1>To-do app !🧑🏻‍💻</h1>
+  <div class="container">
+    <div class="input-group">
+      <input id="task-input" type="text" placeholder="Añadir tarea...">
+      <button id="add-tsk">+</button>
     </div>
-  </body>
+    <ul id="task-list"></ul>
+    <script type="module" src="/src/renderer.js"></script>
+  </div>
+</body>
+
 </html>

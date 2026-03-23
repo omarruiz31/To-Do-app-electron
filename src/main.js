@@ -1,7 +1,8 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import AppDatabase from './database/database';
+import setUpHandlers from './database/ipcHandlers';
 let db
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -9,10 +10,11 @@ if (started) {
 }
 
 const createWindow = () => {
+  Menu.setApplicationMenu(null);
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 400,
+    height: 300,
     alwaysOnTop: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -27,7 +29,7 @@ const createWindow = () => {
   }
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
@@ -35,6 +37,7 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   db = new AppDatabase();
+  setUpHandlers(db);
   createWindow();
 
   // On OS X it's common to re-create a window in the app when the
@@ -50,6 +53,7 @@ app.whenReady().then(() => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
+  db.close();
   if (process.platform !== 'darwin') {
     app.quit();
   }
